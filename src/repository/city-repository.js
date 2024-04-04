@@ -32,6 +32,7 @@ class CityRepository{
 
     async updateCity(cityId,data)
     {
+        // data is the object which has the key as parameter to be updated and value as updated value
         try {
             const city=await City.update(data,{
                 where:{
