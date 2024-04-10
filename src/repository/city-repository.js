@@ -3,6 +3,8 @@ const { City }=require("../models/index");
 // we are destructuring the object to get the required models
 // Key is always the model name
 
+const { Op }=require("sequelize");
+
 class CityRepository{
     async createCity({ name })
     {
@@ -62,11 +64,21 @@ class CityRepository{
             throw{error};
         }
     }
-
-    async getAllCities(){
+// filter object is request param object which can be empty also
+// here name is the key to both the models and the request query
+    async getAllCities(filter){ 
         try {
+            if(filter.name){
+                const cities=await City.findAll({
+                    where:{
+                        name:{
+                            [Op.startsWith]:filter.name
+                        }
+                    }
+                });
+                return cities;
+            }
             const cities=await City.findAll();
-            // console.log(cities);
             return cities;
         } catch (error) {
             console.log("Something went wrong in the repository layer");
