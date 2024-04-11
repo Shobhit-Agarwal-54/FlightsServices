@@ -1,3 +1,5 @@
+// City-controller will get the request from the frontend and pass it to the backend
+// City-controller will send the response received from backend to the frontend
 const { CityService }=require("../services/index");
 // This particular piece of code main sir ne object name and class name same likha hainn
 // I have different names for object and class

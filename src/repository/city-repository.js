@@ -1,3 +1,4 @@
+// Repository layer will interact with the database
 const { City }=require("../models/index");
 // index file will return models for different tables like city airplane flights..
 // we are destructuring the object to get the required models
