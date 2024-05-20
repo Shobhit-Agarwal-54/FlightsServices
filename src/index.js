@@ -5,6 +5,8 @@ const express=require("express");
 
 const bodyParser=require("body-parser");
 
+const db=require("./models/index");
+
 const {PORT}=require("./config/ServerConfig");
 
 const ApiRoutes=require("./routes/index");
@@ -18,8 +20,16 @@ const setupAndStartServer=async()=>{
     
     app.use("/api",ApiRoutes);
 
-    app.listen(PORT, ()=>{
+    app.listen(PORT, async ()=>{
         console.log(`Server started at ${PORT}`);
+        // We are synchronizing all models and their tables only when environment 
+        // variable SYNC_DB is defined
+        // Synchronization needs to be done once after the models and their associations
+        // are created
+        if(process.env.SYNC_DB)
+            {
+                db.sequelize.sync({alter:true});
+            }
     });
 }
 setupAndStartServer();

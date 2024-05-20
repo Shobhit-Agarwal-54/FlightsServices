@@ -24,6 +24,9 @@ module.exports = {
           model:"Cities",
           key:"id",
           as:"cityId"
+          // On the above 3 lines first ensure that the name of the model is in plural because this is
+          // a migration file further Cities Model ka id key is getting compared with cityId key of Airports model
+          // Sequence of 3 keys is just a syntax.
         },
         allowNull:false 
       },
