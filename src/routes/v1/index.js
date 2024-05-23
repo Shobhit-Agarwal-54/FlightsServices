@@ -4,6 +4,7 @@ const router = express.Router();
 const CityController = require("../../controllers/city-controller");
 const FlightController=require("../../controllers/flight-controller");
 const AirportController=require("../../controllers/aiport-controller");
+const {FlightMiddlewares}=require("../../middlewares/index");
 
 // :id represents the id number written in the URL of the routed request
 // API 1
@@ -17,7 +18,10 @@ router.patch("/city/:id",CityController.update);
 // API 5
 router.get("/city",CityController.getAll);
 
-router.post("/flights",FlightController.create);
+router.post("/flights",
+FlightMiddlewares.validateCreateFlight,
+FlightController.create);
+
 
 router.get("/flights",FlightController.getAll);
 
