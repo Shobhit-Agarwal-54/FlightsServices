@@ -1,6 +1,6 @@
 // MiddleWares are used to filter out or check if our request body follows the 
 // API contracts or we can say if it has all compulsory key-value pairs
-
+  const {ClientErrorCodes} = require("../utils/error-codes");
 // next is used to take program control to the next middleware
 const validateCreateFlight=(req,res,next)=>{
     if(
@@ -15,7 +15,7 @@ const validateCreateFlight=(req,res,next)=>{
     {
         // if any of the body params is missing we come inside if
         // 400 indicates that it is a bad request
-        return res.status(400).json({
+        return res.status(ClientErrorCodes.BAD_REQUEST).json({
             data:{},
             success:false,
             message:"Invalid request body for creating flight",
